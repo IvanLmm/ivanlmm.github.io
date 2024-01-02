@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta Romántica</title>
+  <link rel="stylesheet" href="romance.css">
+</head>
+<body>
+  <div class="contenedor">
+    <div class="carta">
+      <div class="encabezado">
+        <h1>Carta de Amor <h2><a href="index.html">Regresar</a></h2></h1>
+        <p>Hay muchísimos, pero muchísimos recuerdos que tengo contigo, mi amor, pero me tomaría toda la vida agregarlos aquí.</p>
+      </div>
+      <div class="contenido">
+        <div class="contenedor-imagenes">
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/uno.jpg" alt="Imagen 1"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/dos.jpg" alt="Imagen 2"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/tres.jpg" alt="Imagen 3"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/cuatro.jpg" alt="Imagen 4"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/cinco.jpg" alt="Imagen 5"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/seis.jpg" alt="Imagen 6"></div>
+          <div class="imagen" onclick="zoomImagen(this)"><img src="Imagenes/siete.jpg" alt="Imagen 7"></div>
+          <!-- Repite este div para las demás imágenes -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function zoomImagen(elemento) {
+      elemento.classList.toggle('zoomed');
+    }
+  </script>
+</body>
+</html>
