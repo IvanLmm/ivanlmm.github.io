@@ -1,0 +1,104 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
+
+
+}
+.padre{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+
+
+}
+
+.borroso{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('../img/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    z-index: 1;
+}
+.hijo{
+    width: 400px;
+    padding: 40px;
+    background-color: #00ab69;
+    box-shadow: 0 0 10px rgba(0,0,0,1);
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    
+
+}
+.titulo{
+    color: white;
+    margin-bottom: 30px;
+
+}
+.form input{
+    width: 80%;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: white;
+
+}
+.form .user::placeholder{
+    color: white;
+
+}
+.form .pass::placeholder{
+    color: white;
+
+}
+
+.user, .pass{
+    background-color: #00ab69;
+    
+}
+
+.btn{
+    width: 85%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+.btn:hover{
+    background-color: #45a049;
+
+}
+.form input:focus{
+    outline: none;
+    box-shadow: 0 0 5px #4CAF50;
+    background-color: white;
+    border: 2px solid #4CAF50;
+    color: #333;
+    transition: all 0.5s ease;
+
+
+}
+.form input::placeholder{
+    color: #999;
+
+}
