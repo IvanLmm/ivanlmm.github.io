@@ -20,6 +20,8 @@ body{
 
 }
 
+
+
 .borroso{
     position: absolute;
     width: 100%;
@@ -51,6 +53,14 @@ body{
     margin-bottom: 30px;
 
 }
+.saludo{   
+    align-items: center;
+    position: relative;
+    color: #FFFFFF;
+    left: 20px;
+
+}
+
 .form input{
     width: 80%;
     padding: 5px;
@@ -112,6 +122,10 @@ body{
     top: 0px;
     width: 100vw;
     position: absolute;
+    display: flex;
+    gap: 5px;
+    flex: 1;
+
     z-index: 3;
 
     
@@ -134,7 +148,8 @@ a{
 .cuerpo{
     top: 90px;
     position: absolute;
-    background-color: red;
+    background-color: rgba(0, 171, 105, 0.2);
+    border-radius: 12px;
     width: 90%;
     height: 85%;
     display: flex;
@@ -158,7 +173,7 @@ a{
     height: 350px;
     background-color: #00ab69;
     margin: 30px;
-    border-radius: 16px;
+    border-radius: 12px;
     
 }
 
@@ -187,4 +202,28 @@ a{
 p{
 margin: 30px;
 text-align: center;
+}
+
+.logout{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    padding: 10px;
+    height: fit-content;
+    border: none;
+    border-radius: 8px;
+    background-color: #008B57;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+
+
+
+
+
+}
+.logout:hover{
+    background-color: #00C97F;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
