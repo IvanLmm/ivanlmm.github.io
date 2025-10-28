@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("conexion.php");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -54,7 +55,7 @@ if (isset($_GET['delete'])) {
     $params = array($id);
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt) {
-        header("Location: clientes.php?msg=" . urlencode("🗑️ Cliente eliminado."));
+        header("Location: clientes.php?msg=" . urlencode("🗑️ Cliente eliminado correctamente."));
         exit;
     } else {
         $mensaje = "❌ Error al eliminar: " . print_r(sqlsrv_errors(), true);
@@ -94,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar'])) {
 if (isset($_GET['msg'])) {
     $mensaje = $_GET['msg'];
 }
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -108,7 +110,7 @@ if (isset($_GET['msg'])) {
         th{background:#eaeaea;}
         .btn{background:#007bff;color:#fff;padding:5px 10px;border-radius:5px;text-decoration:none;}
         .btn-danger{background:#dc3545;}
-        .msg{padding:10px;margin:10px 0;border-radius:5px;}
+        .msg{padding:10px;margin:10px 0;border-radius:5px;text-align:center;font-weight:bold;}
         .ok{background:#e8f6e8;color:#19692c;}
         .err{background:#fbeaea;color:#962d2d;}
     </style>
@@ -171,14 +173,12 @@ if (isset($_GET['msg'])) {
         </table>
     <?php endif; ?>
 </div>
+
 <script>
-  // Si hay un mensaje de éxito, recarga automáticamente después de 1 segundo
-  const msg = document.querySelector('.msg');
-  if (msg && msg.textContent.includes("✅")) {
-      setTimeout(() => {
-          window.location.href = window.location.pathname; // Recarga limpia
-      }, 1000);
-  }
+const msg = document.querySelector('.msg');
+if (msg && msg.textContent.includes("✅")) {
+    setTimeout(() => { window.location.href = window.location.pathname; }, 3000);
+}
 </script>
 </body>
 </html>

@@ -180,7 +180,7 @@ ob_end_flush(); // Finaliza el buffer de salida
 <script>
 const msg = document.querySelector('.msg');
 if (msg && msg.textContent.includes("✅")) {
-    setTimeout(() => { window.location.href = window.location.pathname; }, 1000);
+    setTimeout(() => { window.location.href = window.location.pathname; }, 3000);
 }
 </script>
 </body>
