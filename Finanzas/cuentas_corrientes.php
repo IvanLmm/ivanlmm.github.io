@@ -128,11 +128,28 @@ ob_end_flush();
         .msg{padding:10px;margin:10px 0;border-radius:5px;text-align:center;font-weight:bold;}
         .ok{background:#e8f6e8;color:#19692c;}
         .err{background:#fbeaea;color:#962d2d;}
+        .btn-back {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.2s ease-in-out;
+}
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
     </style>
 </head>
 <body>
 <div class="container">
     <h2>💰 Movimientos de Cuentas Corrientes</h2>
+    <div style="margin-top: 20px;">
+    <a href="menuprincipal.html" class="btn btn-back">⬅️ Volver al Menú Principal</a>
+</div>
+
 
     <?php if (!empty($mensaje)): ?>
         <div class="msg <?php echo (strpos($mensaje, 'Error') !== false) ? 'err' : 'ok'; ?>">

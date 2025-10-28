@@ -73,6 +73,10 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
 <body class="bg-light">
 <div class="container py-4">
     <h2 class="text-center mb-4">Gestión de Transacciones</h2>
+    <div style="margin-top: 20px;">
+    <a href="menuprincipal.html" class="btn btn-back">⬅️ Volver al Menú Principal</a>
+</div>
+
 
     <!-- === FORMULARIO === -->
     <form method="POST" class="card p-3 mb-4">
