@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar'])) {
         $params = array($id_cliente, $fecha, $tipo, $monto, $descripcion);
         $stmt = sqlsrv_query($conn, $sql, $params);
         if ($stmt) {
-            header("Location: movimientoscc.php?msg=" . urlencode("✅ Movimiento agregado correctamente."));
+            header("Location: cuentas_corrientes.php?msg=" . urlencode("✅ Movimiento agregado correctamente."));
             exit;
         } else {
             $mensaje = "❌ Error al insertar: " . print_r(sqlsrv_errors(), true);
@@ -71,7 +71,7 @@ if (isset($_GET['delete'])) {
     $params = array($id);
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt) {
-        header("Location: movimientoscc.php?msg=" . urlencode("🗑️ Movimiento eliminado correctamente."));
+        header("Location: cuentas_corrientes.php?msg=" . urlencode("🗑️ Movimiento eliminado correctamente."));
         exit;
     } else {
         $mensaje = "❌ Error al eliminar: " . print_r(sqlsrv_errors(), true);
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar'])) {
     $params = array($id, $id_cliente, $fecha, $tipo, $monto, $descripcion);
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt) {
-        header("Location: movimientoscc.php?msg=" . urlencode("✏️ Movimiento actualizado correctamente."));
+        header("Location: cuentas_corrientes.php?msg=" . urlencode("✏️ Movimiento actualizado correctamente."));
         exit;
     } else {
         $mensaje = "❌ Error al actualizar: " . print_r(sqlsrv_errors(), true);
@@ -143,7 +143,7 @@ ob_end_flush();
     <form method="get">
         <input type="text" name="buscar" placeholder="Buscar por cliente..." value="<?php echo isset($busqueda) ? htmlspecialchars($busqueda) : ''; ?>">
         <button type="submit" class="btn">🔍 Buscar</button>
-        <a href="movimientoscc.php" class="btn">🔄 Limpiar</a>
+        <a href="cuentas_corrientes.php" class="btn">🔄 Limpiar</a>
     </form>
 
     <form method="post" style="margin-top:20px;">
@@ -181,7 +181,7 @@ ob_end_flush();
         <button type="submit" name="<?php echo $modo_editar?'actualizar':'guardar';?>" class="btn">
             <?php echo $modo_editar?'Actualizar':'Guardar';?>
         </button>
-        <?php if ($modo_editar): ?><a href="movimientoscc.php" class="btn btn-danger">Cancelar</a><?php endif; ?>
+        <?php if ($modo_editar): ?><a href="cuentas_corrientes.php" class="btn btn-danger">Cancelar</a><?php endif; ?>
     </form>
 
     <h3 style="margin-top:30px;">📋 Listado de Movimientos</h3>
@@ -199,8 +199,8 @@ ob_end_flush();
                     <td><?php echo htmlspecialchars($m['monto']); ?></td>
                     <td><?php echo htmlspecialchars($m['descripcion']); ?></td>
                     <td>
-                        <a href="movimientoscc.php?edit=<?php echo $m['id_movimiento']; ?>" class="btn">✏️</a>
-                        <a href="movimientoscc.php?delete=<?php echo $m['id_movimiento']; ?>" class="btn btn-danger"
+                        <a href="cuentas_corrientes.php?edit=<?php echo $m['id_movimiento']; ?>" class="btn">✏️</a>
+                        <a href="cuentas_corrientes.php?delete=<?php echo $m['id_movimiento']; ?>" class="btn btn-danger"
                            onclick="return confirm('¿Eliminar este movimiento?')">🗑️</a>
                     </td>
                 </tr>
