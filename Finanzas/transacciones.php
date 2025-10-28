@@ -188,7 +188,7 @@ function editar(data) {
 <script>
   // Si hay un mensaje de éxito, recarga automáticamente después de 1 segundo
   const msg = document.querySelector('.msg');
-  if (msg && msg.textContent.includes("✅")) {
+  if (msg && msg.textContent.includes("correctamente")) {
       setTimeout(() => {
           window.location.href = window.location.pathname; // Recarga limpia
       }, 1000);

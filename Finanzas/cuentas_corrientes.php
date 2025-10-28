@@ -211,7 +211,7 @@ ob_end_flush();
 
 <script>
 const msg = document.querySelector('.msg');
-if (msg && msg.textContent.includes("✅")) {
+if (msg && msg.textContent.includes("correctamente")) {
     setTimeout(() => { window.location.href = window.location.pathname; }, 3000);
 }
 </script>
