@@ -8,12 +8,12 @@ $mensaje = '';
 if (isset($_POST['vista'])) {
     $vista = $_POST['vista'];
 
-    // Sanitizar nombre de vista (solo permitidas estas 4)
+    // 🔹 Solo permitir las 4 vistas válidas
     $vistas_permitidas = [
-        'vw_balance_comprobacion',
-        'vw_estado_resultados',
-        'vw_balance_financiero',
-        'vw_movimientos_cc'
+        'vw_BalanceComprobacion',
+        'vw_EstadoResultados',
+        'vw_BalanceGeneral',
+        'vw_MovimientosCC'
     ];
 
     if (in_array($vista, $vistas_permitidas)) {
@@ -75,10 +75,10 @@ if (isset($_POST['vista'])) {
         <div class="input-group">
             <select name="vista" id="vista" class="form-select" required>
                 <option value="">-- Seleccionar vista --</option>
-                <option value="vw_balance_comprobacion" <?php if($vista=="vw_balance_comprobacion") echo "selected"; ?>>Balance de Comprobación</option>
-                <option value="vw_estado_resultados" <?php if($vista=="vw_estado_resultados") echo "selected"; ?>>Estado de Resultados</option>
-                <option value="vw_balance_financiero" <?php if($vista=="vw_balance_financiero") echo "selected"; ?>>Balance Financiero</option>
-                <option value="vw_movimientos_cc" <?php if($vista=="vw_movimientos_cc") echo "selected"; ?>>Movimientos de Cuentas Corrientes</option>
+                <option value="vw_BalanceComprobacion" <?php if($vista=="vw_BalanceComprobacion") echo "selected"; ?>>Balance de Comprobación</option>
+                <option value="vw_EstadoResultados" <?php if($vista=="vw_EstadoResultados") echo "selected"; ?>>Estado de Resultados</option>
+                <option value="vw_BalanceGeneral" <?php if($vista=="vw_BalanceGeneral") echo "selected"; ?>>Balance General</option>
+                <option value="vw_MovimientosCC" <?php if($vista=="vw_MovimientosCC") echo "selected"; ?>>Movimientos de Cuentas Corrientes</option>
             </select>
             <button type="submit" class="btn btn-primary">Mostrar</button>
         </div>
