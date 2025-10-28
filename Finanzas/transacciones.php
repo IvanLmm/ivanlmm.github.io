@@ -69,6 +69,28 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
     <meta charset="UTF-8">
     <title>Gestión de Transacciones</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+        .btn-back {
+            display: inline-block;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.2s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+        /* (Opcional) Para ajustar el contenedor */
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+
 </head>
 <body class="bg-light">
 <div class="container py-4">
