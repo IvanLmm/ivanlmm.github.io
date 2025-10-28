@@ -2,7 +2,7 @@
 require_once 'conexion.php';
 
 // Ejecutar el procedimiento almacenado
-$sql = "{CALL sp_select_transacciones}";
+$sql = "EXEC dbo.sp_select_transacciones";
 $stmt = sqlsrv_query($conn, $sql);
 
 if ($stmt === false) {
