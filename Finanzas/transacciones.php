@@ -8,6 +8,7 @@ $stmt = sqlsrv_query($conn, $sql);
 if ($stmt === false) {
     echo "<h3>Error al ejecutar el procedimiento:</h3>";
     die(print_r(sqlsrv_errors(), true));
+    
 }
 ?>
 <!DOCTYPE html>
