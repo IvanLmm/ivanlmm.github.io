@@ -24,7 +24,7 @@
 
              <h2 class="encabezado">Listado de Transacciones</h2>
 
-             <table class="table table-striped table-bordered">
+             <table class="table">
         <thead class="table-dark">
           <tr>
             <th>ID</th>
@@ -37,9 +37,11 @@
           </tr>
         </thead>
         <tbody>
+            
         <?php
 
         require_once 'conexion.php';
+
         // Recorrer resultados
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
             // Protección básica contra XSS
