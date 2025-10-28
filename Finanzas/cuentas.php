@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Evita errores de encabezado (headers already sent)
 include("conexion.php");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -92,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar'])) {
 if (isset($_GET['msg'])) {
     $mensaje = $_GET['msg'];
 }
+ob_end_flush(); // Finaliza el buffer de salida
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -106,7 +108,7 @@ if (isset($_GET['msg'])) {
         th{background:#eaeaea;}
         .btn{background:#007bff;color:#fff;padding:5px 10px;border-radius:5px;text-decoration:none;}
         .btn-danger{background:#dc3545;}
-        .msg{padding:10px;margin:10px 0;border-radius:5px;}
+        .msg{padding:10px;margin:10px 0;border-radius:5px;text-align:center;font-weight:bold;}
         .ok{background:#e8f6e8;color:#19692c;}
         .err{background:#fbeaea;color:#962d2d;}
     </style>
@@ -174,5 +176,12 @@ if (isset($_GET['msg'])) {
         </table>
     <?php endif; ?>
 </div>
+
+<script>
+const msg = document.querySelector('.msg');
+if (msg && msg.textContent.includes("✅")) {
+    setTimeout(() => { window.location.href = window.location.pathname; }, 1000);
+}
+</script>
 </body>
 </html>

@@ -171,5 +171,14 @@ if (isset($_GET['msg'])) {
         </table>
     <?php endif; ?>
 </div>
+<script>
+  // Si hay un mensaje de éxito, recarga automáticamente después de 1 segundo
+  const msg = document.querySelector('.msg');
+  if (msg && msg.textContent.includes("✅")) {
+      setTimeout(() => {
+          window.location.href = window.location.pathname; // Recarga limpia
+      }, 1000);
+  }
+</script>
 </body>
 </html>
