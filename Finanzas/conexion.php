@@ -12,5 +12,4 @@ $conn = sqlsrv_connect($server, $connectionOptions);
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-echo "Conexión exitosa a SQL Server.";
 ?>
