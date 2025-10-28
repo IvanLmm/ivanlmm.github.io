@@ -1,7 +1,18 @@
 <?php
 require_once 'conexion.php';
 
-// --- INSERTAR ---
+// === OBTENER LISTA DE CUENTAS PARA LOS SELECT ===
+$cuentas = [];
+$sqlCuentas = "SELECT id_cuenta, nombre FROM dbo.cuentas ORDER BY nombre ASC";
+$stmtCuentas = sqlsrv_query($conn, $sqlCuentas);
+if ($stmtCuentas) {
+    while ($row = sqlsrv_fetch_array($stmtCuentas, SQLSRV_FETCH_ASSOC)) {
+        $cuentas[] = $row;
+    }
+    sqlsrv_free_stmt($stmtCuentas);
+}
+
+// === INSERTAR ===
 if (isset($_POST['accion']) && $_POST['accion'] === 'insertar') {
     $sql = "{CALL sp_insert_transaccion(?, ?, ?, ?, ?, ?)}";
     $params = [
@@ -14,10 +25,11 @@ if (isset($_POST['accion']) && $_POST['accion'] === 'insertar') {
     ];
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
-    echo "<script>alert('Transacción insertada correctamente');</script>";
+    echo "<script>alert('Transacción insertada correctamente');window.location='transacciones.php';</script>";
+    exit;
 }
 
-// --- ACTUALIZAR ---
+// === ACTUALIZAR ===
 if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
     $sql = "{CALL sp_update_transaccion(?, ?, ?, ?, ?, ?, ?)}";
     $params = [
@@ -31,20 +43,22 @@ if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
     ];
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
-    echo "<script>alert('Transacción actualizada correctamente');</script>";
+    echo "<script>alert('Transacción actualizada correctamente');window.location='transacciones.php';</script>";
+    exit;
 }
 
-// --- ELIMINAR ---
+// === ELIMINAR ===
 if (isset($_GET['eliminar'])) {
     $id = (int)$_GET['eliminar'];
     $sql = "{CALL sp_delete_transaccion(?)}";
     $params = [$id];
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
-    echo "<script>alert('Transacción eliminada correctamente');</script>";
+    echo "<script>alert('Transacción eliminada correctamente');window.location='transacciones.php';</script>";
+    exit;
 }
 
-// --- CONSULTAR TODAS ---
+// === CONSULTAR TRANSACCIONES ===
 $sql = "EXEC sp_select_transacciones";
 $stmt = sqlsrv_query($conn, $sql);
 if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
@@ -58,10 +72,9 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
 </head>
 <body class="bg-light">
 <div class="container py-4">
-
     <h2 class="text-center mb-4">Gestión de Transacciones</h2>
 
-    <!-- Formulario -->
+    <!-- === FORMULARIO === -->
     <form method="POST" class="card p-3 mb-4">
         <h5>Registrar / Editar Transacción</h5>
         <div class="row g-2">
@@ -88,13 +101,25 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
                     <option value="CREDITO">Crédito</option>
                 </select>
             </div>
+
             <div class="col-md-1">
-                <label>ID Cuenta</label>
-                <input type="number" name="id_cuenta" class="form-control" required>
+                <label>Cuenta</label>
+                <select name="id_cuenta" class="form-select" required>
+                    <option value="">Seleccione...</option>
+                    <?php foreach ($cuentas as $c) {
+                        echo "<option value='{$c['id_cuenta']}'>{$c['nombre']}</option>";
+                    } ?>
+                </select>
             </div>
+
             <div class="col-md-1">
-                <label>Cuenta Contra</label>
-                <input type="number" name="id_cuenta_contra" class="form-control" required>
+                <label>Contra</label>
+                <select name="id_cuenta_contra" class="form-select" required>
+                    <option value="">Seleccione...</option>
+                    <?php foreach ($cuentas as $c) {
+                        echo "<option value='{$c['id_cuenta']}'>{$c['nombre']}</option>";
+                    } ?>
+                </select>
             </div>
         </div>
         <div class="mt-3">
@@ -104,7 +129,7 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
         </div>
     </form>
 
-    <!-- Tabla -->
+    <!-- === TABLA DE DATOS === -->
     <div class="table-responsive">
         <table class="table table-bordered table-striped text-center align-middle">
             <thead class="table-dark">
@@ -132,7 +157,7 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
                         <td>{$row['cuenta']}</td>
                         <td>{$row['cuenta_contra']}</td>
                         <td>
-                            <button type='button' class='btn btn-warning btn-sm' 
+                            <button type='button' class='btn btn-warning btn-sm'
                                 onclick='editar(" . json_encode($row) . ")'>Editar</button>
                             <a href='?eliminar={$row['id_transaccion']}' class='btn btn-danger btn-sm'
                                onclick='return confirm(\"¿Eliminar esta transacción?\")'>Eliminar</a>
@@ -147,6 +172,7 @@ if ($stmt === false) { die(print_r(sqlsrv_errors(), true)); }
     </div>
 </div>
 
+<!-- === SCRIPT DE EDICIÓN === -->
 <script>
 function editar(data) {
     document.querySelector('[name=id_transaccion]').value = data.id_transaccion;
@@ -159,6 +185,5 @@ function editar(data) {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
-
 </body>
 </html>
