@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="menu.js"></script>
     <title>Bienvenido $user</title>
-    <link rel="stylesheet" href="css/estils.css">
+    <link rel="stylesheet" href="css/estilos.css">
 
 
 
@@ -24,24 +24,56 @@
 
              <h2 class="encabezado">Listado de Transacciones</h2>
 
-            <?php
-include("conexion.php");
+             <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Tipo</th>
+            <th>Cuenta</th>
+            <th>Cuenta contrapartida</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php
 
-// Prueba una consulta
-$sql = "SELECT TOP 1 * FROM transacciones";
-$stmt = sqlsrv_query($conn, $sql);
+        require_once 'conexion.php';
+        // Recorrer resultados
+        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+            // Protección básica contra XSS
+            $id = htmlspecialchars($row['id_transaccion']);
+            // Fecha: convertir a formato legible si viene como objeto DateTime
+            $fecha = $row['fecha'];
+            if ($fecha instanceof DateTime) {
+                $fecha = $fecha->format('Y-m-d');
+            } else {
+                $fecha = htmlspecialchars($fecha);
+            }
+            $descripcion = htmlspecialchars($row['descripcion']);
+            // Formatear monto con 2 decimales
+            $monto = number_format((float)$row['monto'], 2, '.', ',');
+            $tipo = htmlspecialchars($row['tipo']);
+            $cuenta = htmlspecialchars($row['cuenta']);
+            $cuenta_contra = htmlspecialchars($row['cuenta_contra']);
 
-if ($stmt === false) {
-    echo "<p>Error al ejecutar consulta:</p>";
-    print_r(sqlsrv_errors());
-} else {
-    echo "<p style='color:green'>✅ Conexión y consulta correcta.</p>";
-    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    echo "<pre>";
-    print_r($row);
-    echo "</pre>";
-}
-?>
+            echo "<tr>
+                    <td>{$id}</td>
+                    <td>{$fecha}</td>
+                    <td>{$descripcion}</td>
+                    <td class='text-end'>{$monto}</td>
+                    <td>{$tipo}</td>
+                    <td>{$cuenta}</td>
+                    <td>{$cuenta_contra}</td>
+                  </tr>";
+        }
+        // Liberar recursos
+        sqlsrv_free_stmt($stmt);
+        sqlsrv_close($conn);
+        ?>
+        </tbody>
+      </table>
 
 
 
