@@ -1,7 +1,7 @@
 <?php
 $server = "4.206.135.183";
 $connectionOptions = [
-  "Database" => "ProyectoDB",
+  "Database" => "Proyecto",
   "Uid" => "orlynk",
   "PWD" => "12345678",
   "Encrypt" => true,                 // cifrado ON
