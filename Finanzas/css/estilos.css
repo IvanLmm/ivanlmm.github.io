@@ -130,6 +130,17 @@ body{
 
     
 }   
+
+.encabezado{
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+}
 ul{
     list-style: none;
     display: flex;

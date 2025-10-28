@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="menu.js"></script>
+    <title>Bienvenido $user</title>
+    <link rel="stylesheet" href="css/estils.css">
+
+
+
+</head>
+<body>
+
+    <div class="padre">
+        <div class="borroso"></div>
+
+        <div class="header">
+               <h2 class="saludo">Bienvenido,</h2><h2 class="saludo" id="usuario">$user</h2>
+
+               <button class="logout">Cerrar Sesion</button>
+        </div>
+        <div class="cuerpo">
+
+             <h2 class="encabezado">Listado de Transacciones</h2>
+
+            <?php
+include("conexion.php");
+
+// Prueba una consulta
+$sql = "SELECT TOP 1 * FROM transacciones";
+$stmt = sqlsrv_query($conn, $sql);
+
+if ($stmt === false) {
+    echo "<p>Error al ejecutar consulta:</p>";
+    print_r(sqlsrv_errors());
+} else {
+    echo "<p style='color:green'>✅ Conexión y consulta correcta.</p>";
+    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    echo "<pre>";
+    print_r($row);
+    echo "</pre>";
+}
+?>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>
